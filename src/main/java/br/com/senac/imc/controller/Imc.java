@@ -3,12 +3,14 @@ package br.com.senac.imc.controller;
 import br.com.senac.imc.dtos.ImcResponseDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/imc")
+@CrossOrigin
 public class Imc {
     @GetMapping("/calcular")
     public ResponseEntity<ImcResponseDto> calcular(@RequestParam Double peso, @RequestParam Double altura){

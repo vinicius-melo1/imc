@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        function calcular() {
+            const peso = document.getElementById("input-peso").value;
+            const altura = document.getElementById("input-altura").value;
+
+            if (!peso || peso === "0") {
+                alert("Peso informado é invalido");
+                return;
+            }
+
+            if (!altura || altura === "0") {
+                alert("Altura informada é invalida");
+                return;
+            }
+
+            axios.get(`http://localhost:8080/imc/calcular?peso=${peso}&altura=${altura}`)
+                .then(response => {
+                    if (response.status === 200) {
+                        alert(`IMC Calculado: ${response.data.imc}, classificação: ${response.data.classificacao}`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro na requisição:', error);
+                    alert("Erro na requisição: " + error);
+                });
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="diplay">
+            <div class="numero">
+                <label for="">Peso</label>
+                <input type="text" id="input-peso">
+            </div>
+            <div class="numero">
+                <label for="">Altura</label>
+                <input type="text" id="input-altura">
+            </div>
+            <div>
+                <button onclick="calcular()">Calcular</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
